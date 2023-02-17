@@ -1,10 +1,12 @@
 package com.spring.pokemondungeon.dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class PokemonUpdateRequest {
     private String name;
     private int hp;
-    private int attack;
+    private float attack;
 }
