@@ -1,8 +1,10 @@
 package com.spring.pokemondungeon.service;
 
 import com.spring.pokemondungeon.dto.request.PokemonRegisterRequest;
+import com.spring.pokemondungeon.dto.request.PokemonUpdateRequest;
 import com.spring.pokemondungeon.dto.response.PokemonResponse;
 import com.spring.pokemondungeon.entity.Pokemon;
+import com.spring.pokemondungeon.exception.PokemonException;
 import com.spring.pokemondungeon.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +22,7 @@ public class PokemonService {
 
     //삽입
     @Transactional
-    public PokemonResponse register(PokemonRegisterRequest request){
+    public PokemonResponse register(PokemonRegisterRequest request) {
         Pokemon pokemon = new Pokemon(
                 request.getName(),
                 request.getHp(),
@@ -59,5 +61,24 @@ public class PokemonService {
 
         pokemonRepository.findAll(pageable).map(PokemonResponse::from).getTotalElements();
         return (int) pokemonRepository.findAll(pageable).map(PokemonResponse::from).getTotalElements();
+    }
+
+    @Transactional
+    public PokemonResponse update(Long id, PokemonUpdateRequest request){
+        Pokemon pokemon = pokemonRepository.findById(id).orElseThrow(PokemonException::new);
+
+        pokemon.update(request.getHp(), request.getAttack());
+
+        log.info("pokemon 수정했습니다. {}",pokemon.getId());
+
+        return PokemonResponse.from(pokemon);
+    }
+
+    @Transactional
+    public void delete(Long id){
+        if(pokemonRepository.existsById(id)){
+            pokemonRepository.deleteById(id);
+            log.info("pokemon 삭제했습니다. {}",id);
+        }
     }
 }
