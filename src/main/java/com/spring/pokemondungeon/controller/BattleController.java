@@ -1,7 +1,7 @@
 package com.spring.pokemondungeon.controller;
 
 import com.spring.pokemondungeon.common.dto.ResponseDto;
-import com.spring.pokemondungeon.dto.response.KnockedDown;
+import com.spring.pokemondungeon.dto.response.KnockedDownResponse;
 import com.spring.pokemondungeon.dto.response.PokemonResponse;
 import com.spring.pokemondungeon.service.BattleService;
 import io.swagger.annotations.Api;
@@ -38,8 +38,8 @@ public class BattleController {
 
     @ApiOperation(value = "쓰러뜨린 포켓몬 수")
     @RequestMapping(value = "/knocked-pokemon")
-    public KnockedDown knockedPokemon(){
-        return new KnockedDown(battleService.getOpponentPokemonId());
+    public KnockedDownResponse knockedPokemon(){
+        return new KnockedDownResponse(battleService.getOpponentPokemonId());
     }
 
 
