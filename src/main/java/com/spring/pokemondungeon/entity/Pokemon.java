@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Table(name = "poke")
+@Table(name = "pokemon")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Pokemon {
 
@@ -35,5 +35,9 @@ public class Pokemon {
     public void update(int hp, float attack){
         this.attack = attack;
         this.hp = hp;
+    }
+
+    public void attacked(int damage){
+        this.hp -= damage;
     }
 }
