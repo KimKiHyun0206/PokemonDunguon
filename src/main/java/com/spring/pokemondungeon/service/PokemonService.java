@@ -1,7 +1,7 @@
 package com.spring.pokemondungeon.service;
 
-import com.spring.pokemondungeon.dto.request.PokemonRegisterRequest;
-import com.spring.pokemondungeon.dto.request.PokemonUpdateRequest;
+import com.spring.pokemondungeon.dto.request.pokemon.PokemonRegisterRequest;
+import com.spring.pokemondungeon.dto.request.pokemon.PokemonUpdateRequest;
 import com.spring.pokemondungeon.dto.response.PokemonResponse;
 import com.spring.pokemondungeon.entity.Pokemon;
 import com.spring.pokemondungeon.exception.PokemonException;
