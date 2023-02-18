@@ -1,6 +1,6 @@
-package com.spring.pokemondungeon.service;
+package com.spring.pokemondungeon.service.generate;
 
-import com.spring.pokemondungeon.dto.request.PokemonRegisterRequest;
+import com.spring.pokemondungeon.dto.request.pokemon.PokemonRegisterRequest;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,7 +1,6 @@
-package com.spring.pokemondungeon.service;
+package com.spring.pokemondungeon.service.validation;
 
-import com.spring.pokemondungeon.dto.request.PokemonRegisterRequest;
-import com.spring.pokemondungeon.entity.Pokemon;
+import com.spring.pokemondungeon.dto.request.pokemon.PokemonRegisterRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
