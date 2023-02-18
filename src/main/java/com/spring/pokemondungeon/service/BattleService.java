@@ -36,31 +36,35 @@ public class BattleService {
     }
 
     @Transactional
-    public PokemonResponse opponentAttack(){
+    public PokemonResponse opponentAttack() {
         Pokemon user = pokemonRepository.findById(1L).orElseThrow(PokemonException::new);
         Pokemon opponent = pokemonRepository.findById(knockedDown + 2).orElseThrow(PokemonException::new);
 
-        return attack(opponent,user);
+        return attack(opponent, user);
     }
 
     @Transactional
-    PokemonResponse attack(Pokemon attacker, Pokemon defender){
+    PokemonResponse attack(Pokemon attacker, Pokemon defender) {
         int damage = (int) attacker.getAttack();
 
         defender.attacked(damage);
 
-        log.info("pokemon attack {}",damage);
+        log.info("pokemon attack {}", damage);
+
+        deletePokemon(defender);
 
         return PokemonResponse.from(defender);
     }
 
-    private boolean checkPokemonHp(Pokemon pokemon){
+    private boolean checkPokemonHp(Pokemon pokemon) {
         return pokemon.getHp() > 0;
     }
 
-    private void deletePokemon(Long id){
-        if(!checkPokemonHp(pokemonRepository.findById(id).orElseThrow(PokemonException::new))){
-            pokemonService.delete(id);
+    private void deletePokemon(Pokemon pokemon) {
+        if (!checkPokemonHp(pokemon)) {
+            pokemonService.delete(pokemon.getId());
+            knockedDown++;
+            log.info("pokemon hp 0 delete. {}", pokemon.getId());
         }
     }
 }
