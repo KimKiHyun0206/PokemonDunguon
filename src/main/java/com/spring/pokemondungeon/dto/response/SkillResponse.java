@@ -9,11 +9,13 @@ import lombok.Data;
 public class SkillResponse {
     private final String skillName;
     private final int damage;
+    private final int upgrade;
 
     public static SkillResponse from(Skill skill) {
         return new SkillResponse(
                 skill.getSkillName(),
-                skill.getDamage()
+                skill.getDamage(),
+                skill.getUpgrade()
         );
     }
 }

@@ -22,4 +22,11 @@ public class Skill {
 
     @Column(name = "damage")
     private int damage;
+
+    @Column(name = "upgrade")
+    private int upgrade;
+
+    public void upgrade(int damage){
+        this.damage = damage;
+    }
 }
