@@ -26,7 +26,8 @@ public class PokemonService {
         Pokemon pokemon = new Pokemon(
                 request.getName(),
                 request.getHp(),
-                request.getAttack()
+                request.getAttack(),
+                request.getSkill()
         );
 
         Pokemon savePokemon = pokemonRepository.save(pokemon);
@@ -67,7 +68,7 @@ public class PokemonService {
     public PokemonResponse update(Long id, PokemonUpdateRequest request){
         Pokemon pokemon = pokemonRepository.findById(id).orElseThrow(PokemonException::new);
 
-        pokemon.update(request.getHp(), request.getAttack());
+        pokemon.updateHpAndAttack(request.getHp(), request.getAttack());
 
         log.info("pokemon 수정했습니다. {}",pokemon.getId());
 

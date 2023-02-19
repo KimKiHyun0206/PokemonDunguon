@@ -9,4 +9,5 @@ public class PokemonRegisterRequest {
     private String name;
     private int hp;
     private float attack;
+    private String skill;
 }

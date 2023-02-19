@@ -2,6 +2,7 @@ package com.spring.pokemondungeon.service;
 
 import com.spring.pokemondungeon.dto.request.skill.SkillRegisterRequest;
 import com.spring.pokemondungeon.dto.response.SkillResponse;
+import com.spring.pokemondungeon.entity.Pokemon;
 import com.spring.pokemondungeon.entity.Skill;
 import com.spring.pokemondungeon.exception.PokemonException;
 import com.spring.pokemondungeon.repository.SkillRepository;
@@ -49,5 +50,14 @@ public class SkillService {
         log.info("Skill Upgrade. {}",skillName);
 
         return SkillResponse.from(skill);
+    }
+
+    @Transactional(readOnly = true)
+    public Skill mapping(Pokemon pokemon){
+        String skillName = pokemon.getSkill();
+
+        return skillRepository
+                .findById(skillName)
+                .orElseThrow(PokemonException::new);
     }
 }

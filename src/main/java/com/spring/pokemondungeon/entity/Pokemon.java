@@ -26,13 +26,17 @@ public class Pokemon {
     @Column(name="attack")
     private float attack;
 
-    public Pokemon(String name, int hp, float attack) {
+    @Column(name = "skill")
+    private String skill;
+
+    public Pokemon(String name, int hp, float attack,String skill) {
         this.name = name;
         this.hp = hp;
         this.attack = attack;
+        this.skill = skill;
     }
 
-    public void update(int hp, float attack){
+    public void updateHpAndAttack(int hp, float attack){
         this.attack = attack;
         this.hp = hp;
     }
