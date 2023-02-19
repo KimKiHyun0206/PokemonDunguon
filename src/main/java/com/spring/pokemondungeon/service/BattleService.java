@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class BattleService {
-
+    private final Long userPokemon = 1L;
     private final PokemonRepository pokemonRepository;
     private final PokemonService pokemonService;
     private Long knockedDown = 0L;
@@ -22,23 +22,29 @@ public class BattleService {
         return knockedDown + 2;
     }
 
-    public void opponentPokemonKnockedDown() {
-        knockedDown++;
-    }
-
     //공격
     @Transactional
     public PokemonResponse userAttack() {
-        Pokemon user = pokemonRepository.findById(1L).orElseThrow(PokemonException::new);
-        Pokemon opponent = pokemonRepository.findById(knockedDown + 2).orElseThrow(PokemonException::new);
+        Pokemon user = pokemonRepository
+                .findById(userPokemon)
+                .orElseThrow(PokemonException::new);
+
+        Pokemon opponent = pokemonRepository
+                .findById(knockedDown + 2)
+                .orElseThrow(PokemonException::new);
 
         return attack(user, opponent);
     }
 
     @Transactional
     public PokemonResponse opponentAttack() {
-        Pokemon user = pokemonRepository.findById(1L).orElseThrow(PokemonException::new);
-        Pokemon opponent = pokemonRepository.findById(knockedDown + 2).orElseThrow(PokemonException::new);
+        Pokemon user = pokemonRepository
+                .findById(userPokemon)
+                .orElseThrow(PokemonException::new);
+
+        Pokemon opponent = pokemonRepository
+                .findById(knockedDown + 2)
+                .orElseThrow(PokemonException::new);
 
         return attack(opponent, user);
     }
